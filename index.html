@@ -5,46 +5,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Psychedelic Trance</title>
-    <script src="Scripts/app.js" defer></script>
-    <link rel="stylesheet" href="Styles/app.css">
-
-
-
-
+    <title>movement</title>
 </head>
 
 <body>
+    Movement-X : <span id="movementX"></span>px<br>
+    Movement-Y : <span id="movementY"></span>px<br>
+    Movement : <span id="movement"></span>px
+
+    <script>
+        var prevEvent, currentEvent;
+        document.documentElement.onmousemove = function (e) {
+
+            currentEvent = e;
+        }
+
+        setInterval(function () {
+            if (prevEvent && currentEvent) {
+                var movementX = Math.abs(currentEvent.screenX - prevEvent.screenX)
+                var movementY = Math.abs(currentEvent.screenY - prevEvent.screenY)
+                var movement = Math.sqrt(movementX * movementX + movementY * movementY)
+
+                document.getElementById("movementX").innerText = movementX;
+                document.getElementById("movementY").innerText = movementY;
+                document.getElementById("movement").innerText = Math.round(movement);
+            }
+
+            prevEvent = currentEvent;
+
+        }, 80)
+    </script>
 
 
-    <div class="keys">
-        <div data-key="87" class="key">
-            <kbd>W</kbd>
-            <span class="sound"></span>
-        </div>
-
-        <div data-key="65" class="key">
-            <kbd>A</kbd>
-            <span class="sound"></span>
-        </div>
-
-        <div data-key="83" class="key">
-            <kbd>S</kbd>
-            <span class="sound"><span>
-        </div>
-
-        <div data-key="68" class="key">
-            <kbd>D</kbd>
-            <span class="sound"></span>
-        </div>
-
-    </div>
 
 
-    <audio data-key="87" src="sounds/CYCdh_ElecK01-Kick02.wav"></audio>
-    <audio data-key="65" src="sounds/CYCdh_ElecK01-Snr01.wav"></audio>
-    <audio data-key="83" src="sounds/CYCdh_ElecK01-ClHat01.wav"></audio>
-    <audio data-key="68" src="sounds/CYCdh_ElecK01-Tom02.wav"></audio>
 
 
 
